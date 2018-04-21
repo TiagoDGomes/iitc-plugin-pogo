@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.3.2.20180421.151000
+// @version        0.4.0.20180421.171000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go. .
@@ -122,22 +122,7 @@ function wrapper(plugin_info)
         }
         window.plugin.pogo.latestdate = localStorage[plugin.pogo.KEY_STORAGE_DATE];
     };
-
-    window.plugin.pogo.upgradeToNewStorage = function()
-    {
-        if(localStorage['plugin-pogo-portals-data'] && localStorage['plugin-pogo-maps-data'])
-        {
-            var oldStor_1 = JSON.parse(localStorage['plugin-pogo-maps-data']);
-            var oldStor_2 = JSON.parse(localStorage['plugin-pogo-portals-data']);
-
-            window.plugin.pogo.pogoObj.maps = oldStor_1.pogo_maps;
-            window.plugin.pogo.pogoObj.portals = oldStor_2.pogo_portals;
-            window.plugin.pogo.saveStorage();
-
-            localStorage.removeItem('plugin-pogo-maps-data');
-            localStorage.removeItem('plugin-pogo-portals-data');
-        }
-    };
+    
 
     window.plugin.pogo.createStorage = function()
     {
@@ -1231,7 +1216,6 @@ function wrapper(plugin_info)
 
         // If the storage not exists or is a old version
         window.plugin.pogo.createStorage();
-        //window.plugin.pogo.upgradeToNewStorage();
 
         // Load data from localStorage
         window.plugin.pogo.loadStorage();
