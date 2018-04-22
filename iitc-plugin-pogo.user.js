@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.2.20180422.112500
+// @version        0.5.3.20180422.115000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go. .
@@ -475,6 +475,7 @@ function wrapper(plugin_info)
     // Manual import, export and reset data
     window.plugin.pogo.manualOpt = function()
     {
+        window.plugin.pogo.setupContent();
         dialog({
             html: plugin.pogo.htmlSetbox,
             dialogClass: 'ui-dialog-pogoSet',
@@ -496,10 +497,10 @@ function wrapper(plugin_info)
 
         if (value == undefined){
             value = window.plugin.pogo.usePogoMode;
-        } else {
-            localStorage[plugin.pogo.KEY_POGO_MODE] = value;
-            window.plugin.pogo.usePogoMode = value;           
-        }
+        } 
+        window.plugin.pogo.usePogoMode = value === true || value == 'true';
+        localStorage[plugin.pogo.KEY_POGO_MODE] = window.plugin.pogo.usePogoMode
+
 
         if (value){ //pogo mode          
             console.log('pogo mode');
@@ -920,14 +921,14 @@ function wrapper(plugin_info)
         plugin.pogo.htmlCloseButton = '<div class="bottom close"><span class="int_close"><a class="close" title="Close [w]" onclick="renderPortalDetails(null); if(isSmartphone()) show(&quot;map&quot;);$(\'.bottom.close\').css(\'display\', \'none\');" accesskey="w" data-unsp-sanitized="clean">X</a></span></div>';
 
         var actions = '';
-        actions += '<a onclick="window.plugin.pogo.optReset();return false;" title="Deletes all Pokemon Go markers">Reset PoGo portals</a>';
-        actions += '<a onclick="window.plugin.pogo.optCopy();return false;" title="Get data of all Pokemon Go markers">Copy PoGo portals</a>';
-        actions += '<a onclick="window.plugin.pogo.optPaste();return false;" title="Add Pokemon Go markers to the map">Paste PoGo portals</a>';
         var checked = '';
         if (window.plugin.pogo.usePogoMode){
             checked = 'checked="checked"';
         }
         actions += '<input type="checkbox" ' + checked + ' id="pogo_mode_check" onclick="window.plugin.pogo.optPogoMode(this.checked);" ><label for="pogo_mode_check">Pogo Mode</label>';
+        actions += '<a onclick="window.plugin.pogo.optReset();return false;" title="Deletes all Pokemon Go markers">Reset PoGo portals</a>';
+        actions += '<a onclick="window.plugin.pogo.optCopy();return false;" title="Get data of all Pokemon Go markers">Copy PoGo portals</a>';
+        actions += '<a onclick="window.plugin.pogo.optPaste();return false;" title="Add Pokemon Go markers to the map">Paste PoGo portals</a>';
         //actions += '<a onclick="window.plugin.pogo.optLoadData();return false;" title="Loads all recorded Pokemon Go markers from the centralised list" class="pogo-loadall">Load all PoGo portals</a>';
         //actions += '<a onclick="window.plugin.pogo.optSendData();return false;" title="Sends your recorded Pokemon Go markers to the centralised list">Send PoGo portals</a>';
 
