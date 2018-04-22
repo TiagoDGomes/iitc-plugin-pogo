@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.4.20180422.120000
+// @version        0.5.4.20180422.132200
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go. .
@@ -823,7 +823,7 @@ function wrapper(plugin_info)
         $('head').append('<style>.pogo_theme .ui-dialog a{color: #c4fced;}</style>');
         $('head').append('<style>.pogo_theme * {font-family: "Roboto", sans-serif;}</style>');
         $('head').append('<style>.pogo_theme #portaldetails .close {top: unset; right: 50%}</style>');
-        $('head').append('<style>.pokestop_img {background-position-y: -25px;height: 100%; background-image: ' + window.plugin.pogo.POKESTOP_PNG + '}</style>');
+        $('head').append('<style>.pokestop_img {background-position-x: center;background-position-y: -25px;height: 100%; background-image: ' + window.plugin.pogo.POKESTOP_PNG + '}</style>');
 
         $('head').append('<style>.bottom.close {display: none; margin-bottom: 20px;} .bottom.close.show {display: none} .pogo_theme .bottom.close.show {display: block} .pogo_theme .bottom.close a{color: green !important;border: 1px solid green !important;border-radius: 300px;display: inline-block; width: 16px; background-image: linear-gradient(to right, #f7fbf2, #f7fbf2) !important;}</style>');        
         $('head').append('<style>.int_close {border: 1px solid green;border-radius: 40px;padding: 2px; display: inline-block;height: 37px;}</style>');  
