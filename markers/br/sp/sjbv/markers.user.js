@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo-br-sp-sjbv
 // @name           IITC plugin: pogo for portals (update markers: Sao Joao da Boa Vista - SP - Brazil)
 // @category       Controls
-// @version        0.1.1
+// @version        0.1.2.20180422.173500
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/markers/br/sp/sjbv/markers.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/markers/br/sp/sjbv/markers.user.js
 // @description    Update
@@ -18,9 +18,24 @@
 // ==/UserScript==
 
 var KEY_STORAGE = 'plugin-pogo';
-var DEFAULT_VALUE_STORAGE = JSON.stringify({"maps":{"idOthers":{"label":"Others","state":1,"pogo":{}}},"portals":{"idOthers":{"label":"Others","state":1,"pogo":{}}}});
+var DEFAULT_VALUE_STORAGE = JSON.stringify({
+    "maps": {
+        "idOthers": {
+            "label": "Others",
+            "state": 1,
+            "pogo": {}
+        }
+    },
+    "portals": {
+        "idOthers": {
+            "label": "Others",
+            "state": 1,
+            "pogo": {}
+        }
+    }
+});
 
-if (localStorage[window.plugin.pogo.KEY_STORAGE] == undefined || localStorage[window.plugin.pogo.KEY_STORAGE] == {} || localStorage[window.plugin.pogo.KEY_STORAGE] == DEFAULT_VALUE_STORAGE )
+if (localStorage[window.plugin.pogo.KEY_STORAGE] == undefined || localStorage[window.plugin.pogo.KEY_STORAGE] == {} || localStorage[window.plugin.pogo.KEY_STORAGE] == DEFAULT_VALUE_STORAGE)
     localStorage[window.plugin.pogo.KEY_STORAGE] = JSON.stringify({
             "maps": {
                 "idOthers": {
@@ -248,6 +263,16 @@ if (localStorage[window.plugin.pogo.KEY_STORAGE] == undefined || localStorage[wi
                             "guid": "dce71b55a41e405f960348a448c8dd63.16",
                             "latlng": "-21.962424,-46.740739",
                             "label": "ARES - Jardim Pousada do Sol"
+                        },
+                        "id1524421831667": {
+                            "guid": "0d58445039184d63be591d789fd3e5ad.16",
+                            "latlng": "-21.974363,-46.813462",
+                            "label": "Assembleia de Deus"
+                        },
+                        "id1524429021556": {
+                            "guid": "27ae82954e5f4404bab0f7378a3d050c.16",
+                            "latlng": "-21.979308,-46.812258",
+                            "label": "Igreja do Evangelho Quadrangular "
                         }
                     }
                 },
@@ -834,17 +859,41 @@ if (localStorage[window.plugin.pogo.KEY_STORAGE] == undefined || localStorage[wi
                             "guid": "a7d2387b1efa4418b1e3b9a7ca69e57e.16",
                             "latlng": "-21.964454,-46.740189",
                             "label": "Igreja Do Evangelho Quadrangular"
-                        }
-                    }
-                },
-                "id1524336782743": {
-                    "label": "none",
-                    "state": 1,
-                    "pogo": {
-                        "id1524337993677": {
-                            "guid": "27ae82954e5f4404bab0f7378a3d050c.16",
-                            "latlng": "-21.979308,-46.812258",
-                            "label": "Igreja do Evangelho Quadrangular "
+                        },
+                        "id1524421868999": {
+                            "guid": "a7a2c47fad3b4953a73e87a5ea5f026c.16",
+                            "latlng": "-21.976091,-46.812895",
+                            "label": "Igreja Petencostal Deus é Amor."
+                        },
+                        "id1524428243208": {
+                            "guid": "109debfa3232450eb2bfe032b8fae013.16",
+                            "latlng": "-21.957181,-46.803356",
+                            "label": "Centro Espírita Universal "
+                        },
+                        "id1524428282320": {
+                            "guid": "e1720e3d0cae4e3e96c483ea05c83a14.16",
+                            "latlng": "-21.955682,-46.796744",
+                            "label": "Salão Do Reino Das Testemunhas De Jeová "
+                        },
+                        "id1524428285632": {
+                            "guid": "4f92912ec45147a1900fc4d1427f7e4b.16",
+                            "latlng": "-21.955498,-46.798288",
+                            "label": "Igreja Assembleia De Deus Ministério De Madureira"
+                        },
+                        "id1524428303888": {
+                            "guid": "b3a53d2783174fb0aedd09ac79fa99ef.16",
+                            "latlng": "-21.953516,-46.794689",
+                            "label": "Igreja Batista Ágape "
+                        },
+                        "id1524429073365": {
+                            "guid": "e9cb4fa094f64b049e138c676fbfdfc6.16",
+                            "latlng": "-21.98058,-46.809446",
+                            "label": "Academia ao Ar Livre"
+                        },
+                        "id1524429084754": {
+                            "guid": "af6fad288cd54f65979235dc711c6b55.16",
+                            "latlng": "-21.978185,-46.813871",
+                            "label": "Igreja Evangélica Assembleia de Deus"
                         }
                     }
                 }
