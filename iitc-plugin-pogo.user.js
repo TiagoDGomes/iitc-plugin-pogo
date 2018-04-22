@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.3.20180422.115000
+// @version        0.5.4.20180422.120000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go. .
@@ -207,7 +207,7 @@ function wrapper(plugin_info)
                 $('#portaldetails > h3.title').before(plugin.pogo.htmlStar);
                 window.plugin.pogo.updateStarPortal();
                 window.plugin.pogo.optPogoMode();
-                $('.pogo_theme .bottom.close').css('display', 'block');
+                $('.bottom.close').addClass('show');
             }, 0);
         }
         
@@ -825,7 +825,7 @@ function wrapper(plugin_info)
         $('head').append('<style>.pogo_theme #portaldetails .close {top: unset; right: 50%}</style>');
         $('head').append('<style>.pokestop_img {background-position-y: -25px;height: 100%; background-image: ' + window.plugin.pogo.POKESTOP_PNG + '}</style>');
 
-        $('head').append('<style>.bottom.close {display: none;margin-bottom: 20px;} .pogo_theme .bottom.close a{color: green !important;border: 1px solid green !important;border-radius: 300px;display: inline-block; width: 16px; background-image: linear-gradient(to right, #f7fbf2, #f7fbf2) !important;}</style>');        
+        $('head').append('<style>.bottom.close {display: none; margin-bottom: 20px;} .bottom.close.show {display: none} .pogo_theme .bottom.close.show {display: block} .pogo_theme .bottom.close a{color: green !important;border: 1px solid green !important;border-radius: 300px;display: inline-block; width: 16px; background-image: linear-gradient(to right, #f7fbf2, #f7fbf2) !important;}</style>');        
         $('head').append('<style>.int_close {border: 1px solid green;border-radius: 40px;padding: 2px; display: inline-block;height: 37px;}</style>');  
         $('head').append('<style>.pogo_theme #sidebar a {text-decoration: none;  }</style>');  
             
@@ -918,7 +918,7 @@ function wrapper(plugin_info)
         plugin.pogo.htmlDisabledMessage = '<div title="Your browser do not support localStorage">Plugin PoGo disabled*.</div>';
         plugin.pogo.htmlStar = '<span class="pogoIconStar"><a class="pogoStop" accesskey="p" onclick="window.plugin.pogo.switchStarPortal(\'pokestop\');return false;" title="Mark this portal as a pokestop [p]"><span></span></a><a class="pogoGym" accesskey="g" onclick="window.plugin.pogo.switchStarPortal(\'gym\');return false;" title="Mark this portal as a PokeGym [g]"><span></span></a></span>';
         plugin.pogo.htmlCallSetBox = '<a onclick="window.plugin.pogo.manualOpt();return false;">PoGo Opt</a>';
-        plugin.pogo.htmlCloseButton = '<div class="bottom close"><span class="int_close"><a class="close" title="Close [w]" onclick="renderPortalDetails(null); if(isSmartphone()) show(&quot;map&quot;);$(\'.bottom.close\').css(\'display\', \'none\');" accesskey="w" data-unsp-sanitized="clean">X</a></span></div>';
+        plugin.pogo.htmlCloseButton = '<div class="bottom close"><span class="int_close"><a class="close" title="Close [w]" onclick="renderPortalDetails(null); if(isSmartphone()) show(&quot;map&quot;);$(\'.bottom.close\').removeClass(\'show\');" accesskey="w" data-unsp-sanitized="clean">X</a></span></div>';
 
         var actions = '';
         var checked = '';
