@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.4.20180422.151000
+// @version        0.5.4.20180422.173000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go. .
@@ -803,9 +803,10 @@ function wrapper(plugin_info)
 
         $('head').append("<style>@import url('https://fonts.googleapis.com/css?family=Roboto');</style>");
         $('head').append('<style>.pogo_theme h3 {height: inherit; text-overflow: inherit; white-space: inherit;position: absolute;top: 4px;z-index: 2;left: 11px;color: #6d9099;}</style>')
-        $('head').append('<style>.pogo_theme [class*="Star"] {position: absolute;top: 50px;}</style>');
+        $('head').append('<style>.pogo_theme [class*="Star"] {position: absolute;top: 50px;z-index: 1}</style>');
         $('head').append('<style>.pogo_theme .pogoIconStar {top: 50px;z-index: 2;left: 43%;}</style>');        
         $('head').append('<style>.pogo_theme #searchwrapper {padding-top: 30px;}</style>');
+        $('head').append('<style>.pogo_theme .leaflet-top.leaflet-left {padding-top: 40px !important;}</style>');
         
 
         
@@ -814,7 +815,8 @@ function wrapper(plugin_info)
         // dark
         $('head').append('<style>.pogo_theme .ui-dialog {color: #c4fced;background-color: #266375 !important; background-image:linear-gradient(to right,  #4ab485, #266375);}</style>');
         
-        $('head').append('<style>.pogo_theme button, .pogo_theme #pogoSetbox a, .pogo_theme #sidebar .linkdetails a, .pogo_theme #toolbox a {border:0;margin-bottom: 15px;color: white;text-transform:uppercase;font-size: 0.9em;border-radius:30px;padding: 10px;background-image: linear-gradient(to right, #a1da95, #22cca9)}</style>');
+        $('head').append('<style>.pogo_theme button, .pogo_theme #pogoSetbox a, .pogo_theme #sidebar .linkdetails a, .pogo_theme #toolbox a, .pogo_theme select {border:0;margin-bottom: 15px;color: white;text-transform:uppercase;font-size: 0.9em;border-radius:30px;padding: 10px;background-image: linear-gradient(to right, #a1da95, #22cca9)}</style>');
+        $('head').append('<style>.pogo_theme select {color: white !important;}</style>');
         $('head').append('<style>.pogo_theme #sidebar .linkdetails, .pogo_theme #toolbox {margin:20px 0 20px 0;text-align: center;}</style>');
         $('head').append('<style>.pogo_theme .imgpreview{background-position-y: 90px;}</style>');
         $('head').append('<style>.pogo_theme .ui-dialog-titlebar button{background-color: #266375 }</style>');
