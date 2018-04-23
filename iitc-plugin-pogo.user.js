@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.4.20180422.173000
+// @version        0.5.4.20180422.215000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go. .
@@ -818,7 +818,7 @@ function wrapper(plugin_info)
         $('head').append('<style>.pogo_theme button, .pogo_theme #pogoSetbox a, .pogo_theme #sidebar .linkdetails a, .pogo_theme #toolbox a, .pogo_theme select {border:0;margin-bottom: 15px;color: white;text-transform:uppercase;font-size: 0.9em;border-radius:30px;padding: 10px;background-image: linear-gradient(to right, #a1da95, #22cca9)}</style>');
         $('head').append('<style>.pogo_theme select {color: white !important;}</style>');
         $('head').append('<style>.pogo_theme #sidebar .linkdetails, .pogo_theme #toolbox {margin:20px 0 20px 0;text-align: center;}</style>');
-        $('head').append('<style>.pogo_theme .imgpreview{background-position-y: 90px;}</style>');
+        $('head').append('<style>.pogo_theme .imgpreview{background-position-y: 64%;}</style>');
         $('head').append('<style>.pogo_theme .ui-dialog-titlebar button{background-color: #266375 }</style>');
         $('head').append('<style>.pogo_theme a[title="View regional scoreboard"], .pogo_theme a[title="Show artifact portal list"], .pogo_theme .layer_off_warning {display: none !important}</style>');
         
