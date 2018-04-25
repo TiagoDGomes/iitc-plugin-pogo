@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.5.20180425.010000
+// @version        0.5.5.20180425.070000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go.
@@ -63,7 +63,9 @@ function wrapper(plugin_info)
     window.plugin.pogo.gymLayers = {};
     window.plugin.pogo.gymLayerGroup = null;
 
-    window.plugin.pogo.iconPack = {}
+    if (typeof window.plugin.pogo.iconPack !== 'undefined') {
+        window.plugin.pogo.iconPack = {}
+    }
     window.plugin.pogo.iconPackSelected = 'default';
     window.plugin.pogo.iconPack[window.plugin.pogo.iconPackSelected] = {
         "name": "Default",        
