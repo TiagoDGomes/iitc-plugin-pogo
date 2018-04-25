@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo-icon-pack-original
 // @name           IITC plugin: pogo for portals (Icon Pack: Original Theme)
 // @category       Iconss
-// @version        0.1.0
+// @version        0.1.1
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iconpack/original/icons.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iconpack/original/icons.user.js
 // @description    Icon Pack (Original Theme)
