@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.6.20180425.202500
+// @version        0.5.6.20180425.203900
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go.
@@ -877,6 +877,7 @@ function wrapper(plugin_info)
         
         style += ('.pogo_theme button, .pogo_theme #pogoSetbox a, .pogo_theme #sidebar .linkdetails a, .pogo_theme #toolbox a, .pogo_theme select {border:0;margin-bottom: 15px;color: white;text-transform:uppercase;font-size: 0.9em;border-radius:30px;padding: 10px;background-image: linear-gradient(to right, #a1da95, #22cca9)}');
         style += ('.pogo_theme select {color: white !important;}');
+        style += ('.pogo_theme option {color: black !important;}');
         style += ('.pogo_theme #sidebar .linkdetails, .pogo_theme #toolbox {margin:20px 0 20px 0;text-align: center;}');
         style += ('.pogo_theme .imgpreview{background-position-y: 64%;}');
         style += ('.pogo_theme .ui-dialog-titlebar button{background-color: #266375 }');
@@ -999,6 +1000,7 @@ function wrapper(plugin_info)
             checked = 'checked="checked"';
         }
         actions += '<p><input type="checkbox" ' + checked + ' id="pogo_stop_disk" onclick="window.plugin.pogo.optStopDisk(this.checked);">&nbsp;<label for="pogo_stop_disk">Show pokestop disk</label></p>';
+        actions += '</fieldset>';
 
         var optionsIconPack = '';
         
@@ -1011,8 +1013,7 @@ function wrapper(plugin_info)
             optionsIconPack += '<option ' + checked + ' value="' + key + '">' + window.plugin.pogo.iconPack[key]['name'] + '</option>';
         }
         actions += '<p><label for="select_icon_pack">Icon pack:</label>&nbsp;<select class="small" onchange="window.plugin.pogo.optIconPack(this.value)" id="select_icon_pack">' + optionsIconPack + '</select></p>';
-        actions += '</fieldset>';
-
+        
 
         actions += '<a onclick="window.plugin.pogo.optReset();return false;" title="Deletes all Pokemon Go markers">Reset PoGo portals</a>';
         actions += '<a onclick="window.plugin.pogo.optCopy();return false;" title="Get data of all Pokemon Go markers">Copy PoGo portals</a>';
