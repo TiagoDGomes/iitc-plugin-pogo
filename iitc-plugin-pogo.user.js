@@ -63,7 +63,7 @@ function wrapper(plugin_info)
     window.plugin.pogo.gymLayers = {};
     window.plugin.pogo.gymLayerGroup = null;
 
-    if (typeof window.plugin.pogo.iconPack !== 'undefined') {
+    if (typeof window.plugin.pogo.iconPack == 'undefined') {
         window.plugin.pogo.iconPack = {}
     }
     window.plugin.pogo.iconPackSelected = 'default';
