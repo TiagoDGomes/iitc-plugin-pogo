@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Controls
-// @version        0.5.5.20180424.214500
+// @version        0.5.5.20180424.214900
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    Mark Ingress portals as a pokestop or gym in Pokemon Go. .
@@ -963,7 +963,7 @@ function wrapper(plugin_info)
         if (window.plugin.pogo.showStopDisk){
             checked = 'checked="checked"';
         }
-        actions += '<input type="checkbox" ' + checked + ' id="pogo_stop_disk" onclick="window.plugin.pogo.optStopDisk(this.checked);"><label for="pogo_stop_disk">Stop disk</label></fieldset>';
+        actions += '<input type="checkbox" ' + checked + ' id="pogo_stop_disk" onclick="window.plugin.pogo.optStopDisk(this.checked);"><label for="pogo_stop_disk">Show pokestop disk</label></fieldset>';
         actions += '<a onclick="window.plugin.pogo.optReset();return false;" title="Deletes all Pokemon Go markers">Reset PoGo portals</a>';
         actions += '<a onclick="window.plugin.pogo.optCopy();return false;" title="Get data of all Pokemon Go markers">Copy PoGo portals</a>';
         actions += '<a onclick="window.plugin.pogo.optPaste();return false;" title="Add Pokemon Go markers to the map">Paste PoGo portals</a>';
