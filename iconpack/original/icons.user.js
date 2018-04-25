@@ -24,7 +24,7 @@ function wrapper(plugin_info) {
     if (typeof window.plugin.pogo !== 'function') {
         window.plugin.pogo = function () {};
     }
-    if (typeof window.plugin.pogo.iconPack !== 'undefined') {
+    if (typeof window.plugin.pogo.iconPack == 'undefined') {
         window.plugin.pogo.iconPack = {}
     }
     
