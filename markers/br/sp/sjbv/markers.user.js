@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo-br-sp-sjbv
 // @name           IITC plugin: pogo for portals (update markers: Sao Joao da Boa Vista - SP - Brazil)
 // @category       Controls
-// @version        0.1.2.20180422.173500
+// @version        0.1.3.20180424.230000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/markers/br/sp/sjbv/markers.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/markers/br/sp/sjbv/markers.user.js
 // @description    Update
@@ -273,6 +273,11 @@ if (localStorage[window.plugin.pogo.KEY_STORAGE] == undefined || localStorage[wi
                             "guid": "27ae82954e5f4404bab0f7378a3d050c.16",
                             "latlng": "-21.979308,-46.812258",
                             "label": "Igreja do Evangelho Quadrangular "
+                        },
+                        "id1524506415789": {
+                            "guid": "81944f45f1f044f2b39ab0c86f9cd1af.16",
+                            "latlng": "-21.967669,-46.808091",
+                            "label": "Quadra Recanto Do Jaguari "
                         }
                     }
                 },
@@ -894,8 +899,48 @@ if (localStorage[window.plugin.pogo.KEY_STORAGE] == undefined || localStorage[wi
                             "guid": "af6fad288cd54f65979235dc711c6b55.16",
                             "latlng": "-21.978185,-46.813871",
                             "label": "Igreja Evangélica Assembleia de Deus"
+                        },
+                        "id1524506418607": {
+                            "guid": "94a8ea42c434489cb0cfbb3c6c31d295.16",
+                            "latlng": "-21.968402,-46.807014",
+                            "label": "Assembleia Deus Remissão "
+                        },
+                        "id1524506423922": {
+                            "guid": "b72eeb74c8d64be7a918f7be48d9f647.16",
+                            "latlng": "-21.966894,-46.823195",
+                            "label": "Assembleia De Deus Belém"
+                        },
+                        "id1524506429620": {
+                            "guid": "c8a333e9b9a84ae79453f6553018c1bb.16",
+                            "latlng": "-21.966947,-46.813679",
+                            "label": "Ginásio Poliesportivo Sesi"
+                        },
+                        "id1524506628910": {
+                            "guid": "21074a950984458f8b484a4789e84a27.16",
+                            "latlng": "-21.956989,-46.799426",
+                            "label": "Assembleia De Deus"
+                        },
+                        "id1524506641518": {
+                            "guid": "d0511f62320145f584f7f6b164f30349.16",
+                            "latlng": "-21.969289,-46.787665",
+                            "label": "Praça do Jardim Santo André "
+                        },
+                        "id1524530979435": {
+                            "guid": "21bfb3cac0164e9c8b44a4157e0535dc.16",
+                            "latlng": "-21.983726,-46.799099",
+                            "label": "Praça Efraim Nogueira Filho"
+                        },
+                        "id1524594733272": {
+                            "guid": "9ebb07135d5848b98fec88df495d78f6.16",
+                            "latlng": "-21.963044,-46.81261",
+                            "label": "Parquinho Jardim Maestro Mourão"
                         }
                     }
+                },
+                "id1524506415838": {
+                    "label": "none",
+                    "state": 1,
+                    "pogo": {}
                 }
             }
         }

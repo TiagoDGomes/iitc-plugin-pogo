@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo-br-sp-sjbv
 // @name           IITC plugin: pogo for portals (update markers: Sao Joao da Boa Vista - SP - Brazil)
 // @category       Controls
-// @version        0.1.2.20180422.173500
+// @version        0.1.3.20180424.230000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/markers/br/sp/sjbv/markers.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/markers/br/sp/sjbv/markers.user.js
 // @description    Update
@@ -15,4 +15,4 @@
 // @match          https://www.ingress.com/mission/*
 // @match          http://www.ingress.com/mission/*
 // @grant          none
-// ==/UserScript==
+// ==/UserScript==s
