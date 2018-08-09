@@ -2,10 +2,10 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Layer
-// @version        0.5.8.20180808.213500
+// @version        0.5.8.20180808.223500
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
-// @description    Mark Ingress portals as a pokestop or gym in Pokemon Go.
+// @description    IITC: Mark Ingress portals as a pokestop or gym in Pokemon Go.
 // @include        https://www.ingress.com/intel*
 // @include        http://www.ingress.com/intel*
 // @match          https://www.ingress.com/intel*
