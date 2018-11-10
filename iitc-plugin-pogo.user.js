@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Layer
-// @version        0.5.8.20181110.015300
+// @version        0.5.9.20181110.031400
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    IITC: Mark Ingress portals as a pokestop or gym in Pokemon Go.
@@ -47,7 +47,8 @@ function wrapper(plugin_info) {
     window.plugin.pogo.KEY_POGO_STOPDISK = 'plugin-pogo-stop-disk';
     window.plugin.pogo.KEY_POGO_ICONPACK = 'plugin-pogo-icon-pack';
     window.plugin.pogo.KEY_STORAGE_DATE = 'plugin-pogo-latestdate';
-
+    window.plugin.pogo.KEY_STORAGE_UPDATE_URL = 'plugin-pogo-update-url';
+    window.plugin.pogo.KEY_STORAGE_AUTO_UPDATE = 'plugin-pogo-auto-update';
     window.plugin.pogo.KEY = {
         key: window.plugin.pogo.KEY_STORAGE,
         field: 'pogoObj'
@@ -559,11 +560,9 @@ function wrapper(plugin_info) {
         }
     };
 
-    window.plugin.pogo.optPaste = function () {
-        var promptAction = prompt('Press CTRL+V to paste it.', '');
-        if (promptAction !== null && promptAction !== '') {
+    window.plugin.pogo.importStr = function(str){
             try {
-                var list = JSON.parse(promptAction); // try to parse JSON first
+                var list = JSON.parse(str); // try to parse JSON first
                 for (var idFolders in list['portals']) {
                     for (var idpogo in list['portals'][idFolders]['pogo']) {
                         var latlng = list['portals'][idFolders]['pogo'][idpogo].latlng;
@@ -586,11 +585,57 @@ function wrapper(plugin_info) {
                 console.warn('pogo: failed to import data: ' + e);
                 window.plugin.pogo.optAlert('<span style="color: #f88">Import failed </span>');
             }
+    }
+
+    window.plugin.pogo.optPaste = function () {
+        var promptAction = prompt('Press CTRL+V to paste it.', '');
+        if (promptAction !== null && promptAction !== '') {
+            window.plugin.pogo.importStr(promptAction);
         }
     };
 
+    window.plugin.pogo.ajaxUpdateURL = function(url){
+        $.ajax({
+                 url: 'https://cors-anywhere.herokuapp.com/' + url,
+                 success: function(data){
+                      window.plugin.pogo.importStr(data);
+                 }
+        });
+    }
+    window.plugin.pogo.optLoadDataURLButton = function(){
+        var url = $('#pogo-url-json').val();
+        if (url !== null && url !== '') {
+             localStorage[window.plugin.pogo.KEY_STORAGE_UPDATE_URL] = url;
+             window.plugin.pogo.ajaxUpdateURL(url);
+        }
+    }
+    window.plugin.pogo.optAutoUpdate = function(val){
+        localStorage[window.plugin.pogo.KEY_STORAGE_AUTO_UPDATE] = val;
+    }
     window.plugin.pogo.optLoadData = function () {
-        alert('This feature has been disabled.');
+        var url = localStorage[window.plugin.pogo.KEY_STORAGE_UPDATE_URL];
+        url = url == undefined ? '': url;
+        var checked = localStorage[window.plugin.pogo.KEY_STORAGE_AUTO_UPDATE] == 'true' ? 'checked="checked"': '';
+        var actions = '';
+        actions += '<div class="pogoSetbox"><input type="text" style="width: 100%" value="'+ url + '" name="pogo-url-json" id="pogo-url-json">';
+        actions += '<p><a onclick="window.plugin.pogo.optLoadDataURLButton()">Update</a></p>';
+        actions += '<p><input type="checkbox" ' + checked + ' id="pogo_auto_update" onclick="window.plugin.pogo.optAutoUpdate(this.checked);">&nbsp;<label for="pogo_auto_update">Auto Update on Load</label></p>';
+        actions += '</div>';
+        dialog({
+            html: actions,
+            dialogClass: 'ui-dialog-pogoSet-url',
+            title: 'Update PoGo Portals from URL'
+        });
+
+        /*var url = prompt('Insert JSON URL:', '');
+        if (url !== null && url !== '') {
+             $.ajax({
+                 url: 'https://cors-anywhere.herokuapp.com/' + url,
+                 success: function(data){
+                      window.plugin.pogo.importStr(data);
+                 }
+             });
+        }*/
         return;
 
     };
@@ -794,10 +839,10 @@ function wrapper(plugin_info) {
         style += '.pogoStop span,.pogoStop.favorite:focus span,.pogoGym span,.pogoGym.favorite:focus span{background-position:left top}';
         style += '.pogoStop:focus span,.pogoStop.favorite span,.pogoGym:focus span,.pogoGym.favorite span{background-position:right top}';
         style += '#updatestatus .pogoStop{float:left;margin:-19px 0 0 -5px;padding:0 3px 1px 4px;background:#262c32}';
-        style += '#pogoSetbox a{display:block;color:#ffce00;border:1px solid #ffce00;padding:3px 0;margin:10px auto;width:80%;text-align:center;background:rgba(8,48,78,.9)}';
-        style += '#pogoSetbox a.disabled,#pogoSetbox a.disabled:hover{color:#666;border-color:#666;text-decoration:none}';
+        style += '.pogoSetbox a{display:block;color:#ffce00;border:1px solid #ffce00;padding:3px 0;margin:10px auto;width:80%;text-align:center;background:rgba(8,48,78,.9)}';
+        style += '.pogoSetbox a.disabled, .pogoSetbox a.disabled:hover{color:#666;border-color:#666;text-decoration:none}';
         style += '.ui-dialog-pogoSet-copy textarea{width:96%;height:120px;resize:vertical}';
-        style += '#pogoSetbox{text-align:center}';
+        style += '.pogoSetbox{text-align:center}';
 
         style += '#sidebar #portaldetails h3.title{width:auto}';
 
@@ -824,7 +869,7 @@ function wrapper(plugin_info) {
         // dark
         style += ('.pogo_theme .ui-dialog {color: #c4fced;background-color: #266375 !important; background-image:linear-gradient(to right,  #4ab485, #266375);}');
 
-        style += ('.pogo_theme button, .pogo_theme #pogoSetbox a, .pogo_theme #sidebar .linkdetails a, .pogo_theme #toolbox a, .pogo_theme select {border:0;margin-bottom: 15px;color: white;text-transform:uppercase;font-size: 0.9em;border-radius:30px;padding: 10px;background-image: linear-gradient(to right, #a1da95, #22cca9)}');
+        style += ('.pogo_theme button, .pogo_theme .pogoSetbox a, .pogo_theme #sidebar .linkdetails a, .pogo_theme #toolbox a, .pogo_theme select {border:0;margin-bottom: 15px;color: white;text-transform:uppercase;font-size: 0.9em;border-radius:30px;padding: 10px;background-image: linear-gradient(to right, #a1da95, #22cca9)}');
         style += ('.pogo_theme select {color: white !important;}');
         style += ('.pogo_theme option {color: black !important;}');
         style += ('.pogo_theme #sidebar .linkdetails, .pogo_theme #toolbox {margin:20px 0 20px 0;text-align: center;}');
@@ -947,7 +992,7 @@ function wrapper(plugin_info) {
         actions += '<a onclick="window.plugin.pogo.optReset();return false;" title="Deletes all Pokemon Go markers">Reset PoGo portals</a>';
         actions += '<a onclick="window.plugin.pogo.optCopy();return false;" title="Get data of all Pokemon Go markers">Copy PoGo portals</a>';
         actions += '<a onclick="window.plugin.pogo.optPaste();return false;" title="Add Pokemon Go markers to the map">Paste PoGo portals</a>';
-        //actions += '<a onclick="window.plugin.pogo.optLoadData();return false;" title="Loads all recorded Pokemon Go markers from the centralised list" class="pogo-loadall">Load all PoGo portals</a>';
+        actions += '<a onclick="window.plugin.pogo.optLoadData();return false;" title="Loads all recorded Pokemon Go markers from the centralised list" class="pogo-loadall">Update PoGo portals from URL</a>';
         //actions += '<a onclick="window.plugin.pogo.optSendData();return false;" title="Sends your recorded Pokemon Go markers to the centralised list">Send PoGo portals</a>';
 
         if (plugin.pogo.isAndroid()) {
@@ -955,7 +1000,7 @@ function wrapper(plugin_info) {
             actions += '<a onclick="window.plugin.pogo.optExport();return false;">Export pogo</a>';
         }
 
-        plugin.pogo.htmlSetbox = '<div id="pogoSetbox">' + actions + '</div>';
+        plugin.pogo.htmlSetbox = '<div class="pogoSetbox">' + actions + '</div>';
         //plugin.pogo.amazonscript = '<script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.7.min.js"></script>';
         plugin.pogo.lodash = '<script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>';
     };
@@ -1030,6 +1075,11 @@ function wrapper(plugin_info) {
                     window.plugin.pogo.setupPortalsList();
                 }
             }, 500);
+        }
+        if (localStorage[window.plugin.pogo.KEY_STORAGE_AUTO_UPDATE] == 'true'){
+            console.log('Auto Update...')
+            var url = localStorage[window.plugin.pogo.KEY_STORAGE_UPDATE_URL];
+            window.plugin.pogo.ajaxUpdateURL(url);
         }
     };
 
