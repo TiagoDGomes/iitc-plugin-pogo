@@ -2,7 +2,7 @@
 // @id             iitc-plugin-pogo
 // @name           IITC plugin: pogo for portals
 // @category       Layer
-// @version        0.5.9.20181113.014000
+// @version        0.6.0.20191126.194000
 // @updateURL      https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.meta.js
 // @downloadURL    https://github.com/TiagoDGomes/iitc-plugin-pogo/raw/master/iitc-plugin-pogo.user.js
 // @description    IITC: Mark Ingress portals as a pokestop or gym in Pokemon Go.
@@ -58,6 +58,8 @@ function wrapper(plugin_info) {
     window.plugin.pogo.stopLayerGroup = null;
     window.plugin.pogo.gymLayers = {};
     window.plugin.pogo.gymLayerGroup = null;
+    window.plugin.pogo.gymExLayers = {};
+    window.plugin.pogo.gymExLayerGroup = null;
 
     if (typeof window.plugin.pogo.iconPack == 'undefined') {
         window.plugin.pogo.iconPack = {};
@@ -72,6 +74,11 @@ function wrapper(plugin_info) {
         },
         "gym": {
             iconUrl: 'data:image/png;base64,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',
+            iconAnchor: [9, 21],
+            iconSize: [17, 22]
+        },
+        "gym_ex": {
+            iconUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wsGEQI652HfNgAAA0hJREFUOE99kk9M22UYx7k0OhKXuJPObGxO/pgtGG1GM6B/KLAJK6sF3DqE0n+MBFoIDjZKC6WAo9Ax2tGBrSCwsRHmkG6SMkbdotuiHjTxZGJcOOhJzTRmBy2lH3+0NepBP8n38L7P+3ze5/CkbbFTUvX08+KiLNGOzBzRjn0v/52tcyrpmdmi9N3Zomf2ZInS92S+IJG9lFNdLUoIdhWUqvaWVGweqNfzSkMDuWbzf8S0KdQ399fVxzIUZbFd+SXihOC5/QWavBYrbywGkLnsKAadFLmdFA44kAqRD/aQ39eVuJf32dEsTfKq0cTOnDxJQpAhlqvlXWdRuGy8eLCY7KKj7M4v5bUjGmpOWcmWvU5RVS2ZsjL2CvUSdy/5LS1k5CryEoIDh8rUZd0OVMP9iA9XkVWsorjGyJ3Ix8xenWf+gxuc812i8M06oV5Jhc9NcdtpciWlScEhZaVa099H5QU34lINLt84kU8f4AtOsbq6yq+PH7MRi7HwUZjCCi2V/vOoOm1IFMeSAqXqpFrrGeKoMMHoxPts4Z++wtjUDD//9CN/RDewDXtR1pop1Rp5a3KM6t5eFOXapEB1/JTacNHHCf8I/qk5vNNzzN8K8+2j9YQsGo0yPreAqsHKMX0zxtkAtYODlFcZkoLjxlZ1UzBA40yQCr0FXUc3kwuLrH//Q0LwF9989whtUweNc1OYR72c1LUdTAj0Fofm7SuXab01j85qxzFyiYdffs3s0jID45PcjHzCb0+eELp9l1qLjbaVG1jfDWBo6kxOYHVdUNmCs5xeC3FmbQmL14++3YnRPoDZOYjB1sfZc14sPj9nIiHa7wjvLgZpdg4lF8kZCGxzO4Z7PK5R2hfmsT9cwbHyIV2+Cbr6R7GPBegML2J7EKbj2jU8PSNRl9PT3HP9enKVt4hvl+yjrIl7jd28c34cW/gmrs/W6L+7jOvzCLblEEPuMb4w2dlQGiEtbVuqNUn8sOnZeGFdCKmBzQort1v7GXrvMs6VZTwTM9xr6oXyZiisF6KbRqp7KtX6bzaKTUfiUt19ZEZ+17SyXtNOTN0iNOmJy+pXonJDQerp/xNTGk8Ioq+EH3+JS/X3NxTG8lTpH6Sl/QlCa+4+OA1mMwAAAABJRU5ErkJggg==',
             iconAnchor: [9, 21],
             iconSize: [17, 22]
         }
@@ -220,6 +227,7 @@ function wrapper(plugin_info) {
 
                 $('.pogoStop').remove();
                 $('.pogoGym').remove();
+                $('.pogoGymEx').remove();
 
                 if (typeof (Storage) === "undefined") {
                     $('#portaldetails > .imgpreview').after(plugin.pogo.htmlDisabledMessage);
@@ -246,6 +254,7 @@ function wrapper(plugin_info) {
         var guid = window.selectedPortal;
         $('.pogoStop').removeClass('favorite');
         $('.pogoGym').removeClass('favorite');
+        $('.pogoGymEx').removeClass('favorite');
         $('.pogo a.pogoLink.selected').removeClass('selected');
 
         // If current portal is into pogo: select pogo portal from portals list and select the star
@@ -259,6 +268,9 @@ function wrapper(plugin_info) {
                 }
                 if (list[pogoData['id_folder']]['label'] === "gym") {
                     $('.pogoGym').addClass('favorite')
+                }
+                if (list[pogoData['id_folder']]['label'] === "gym_ex") {
+                    $('.pogoGymEx').addClass('favorite')
                 }
             }
         }
@@ -295,6 +307,9 @@ function wrapper(plugin_info) {
                 }
                 if (type === 'pokestop') {
                     plugin.pogo.addPortalpogo(guid, ll.lat + ',' + ll.lng, p.options.data.title, 'pokestop');
+                }
+                if (type === 'gym_ex') {
+                    plugin.pogo.addPortalpogo(guid, ll.lat + ',' + ll.lng, p.options.data.title, 'gym_ex');
                 }
             } else {
                 plugin.pogo.addPortalpogo(guid, ll.lat + ',' + ll.lng, p.options.data.title, 'none');
@@ -334,13 +349,18 @@ function wrapper(plugin_info) {
     //check if folders exist
     window.plugin.pogo.checkFolder = function () {
         var list = window.plugin.pogo.pogoObj['portals'];
-        var gym, pokestop, none = 0;
+        var gym, pokestop,gym_ex, none = 0;
         for (var idFolders in list) {
             var folders = list[idFolders];
             if (gym === 1 || folders['label'] === 'gym') {
                 gym = 1;
             } else {
                 gym = 0;
+            }
+            if (gym_ex === 1 || folders['label'] === 'gym_ex') {
+                gym_ex = 1;
+            } else {
+                gym_ex = 0;
             }
             if (pokestop === 1 || folders['label'] === 'pokestop') {
                 pokestop = 1;
@@ -355,6 +375,9 @@ function wrapper(plugin_info) {
         }
         if (gym === 0) {
             window.plugin.pogo.addFolder('gym');
+        }
+        if (gym_ex === 0) {
+            window.plugin.pogo.addFolder('gym_ex');
         }
         if (pokestop === 0) {
             window.plugin.pogo.addFolder('pokestop');
@@ -698,6 +721,11 @@ function wrapper(plugin_info) {
                     fillColor: 'purple'
                 });
             }
+            if (list[pogoData['id_folder']]['label'] === "gym_ex") {
+                data.portal.setStyle({
+                    fillColor: 'green'
+                });
+            }
         }
     };
 
@@ -727,15 +755,21 @@ function wrapper(plugin_info) {
     };
 
     window.plugin.pogo.resetAllStars = function () {
-        for (var guid in window.plugin.pogo.stopLayers) {
+        var guid;
+        for (guid in window.plugin.pogo.stopLayers) {
             var starInLayer = window.plugin.pogo.stopLayers[guid];
             window.plugin.pogo.stopLayerGroup.removeLayer(starInLayer);
             delete window.plugin.pogo.stopLayers[guid];
         }
-        for (var guid in window.plugin.pogo.gymLayers) {
+        for (guid in window.plugin.pogo.gymLayers) {
             var gymInLayer = window.plugin.pogo.gymLayers[guid];
             window.plugin.pogo.gymLayerGroup.removeLayer(gymInLayer);
             delete window.plugin.pogo.gymLayers[guid];
+        }
+        for (guid in window.plugin.pogo.gymExLayers) {
+            var gymExInLayer = window.plugin.pogo.gymExLayers[guid];
+            window.plugin.pogo.gymExLayerGroup.removeLayer(gymInLayer);
+            delete window.plugin.pogo.gymExLayers[guid];
         }
         window.plugin.pogo.addAllStars();
     };
@@ -769,6 +803,10 @@ function wrapper(plugin_info) {
                     window.plugin.pogo.gymLayers[guid] = star;
                     star.addTo(window.plugin.pogo.gymLayerGroup);
                 }
+                if (type === "gym_ex") {
+                    window.plugin.pogo.gymExLayers[guid] = star;
+                    star.addTo(window.plugin.pogo.gymExLayerGroup);
+                }
             }
         } catch (e){
             console.error(lbl, latlng, e);
@@ -777,22 +815,24 @@ function wrapper(plugin_info) {
     };
 
     window.plugin.pogo.editStar = function (data) {
+        var guid, latlng, lbl, starInLayer, type;
         if (data.target === 'portal') {
             if (data.action === 'add') {
-                var guid = data.guid;
+                guid = data.guid;
+                latlng;
                 if (window.portals[guid] === undefined) {
-                    var latlng = data.latlng.split(",");
+                    latlng = data.latlng.split(",");
                 } else {
-                    var latlng = window.portals[guid].getLatLng();
+                    latlng = window.portals[guid].getLatLng();
                 }
-                var lbl = data.lbl;
-                var starInLayer = window.plugin.pogo.stopLayers[data.guid];
-                var type = window.plugin.pogo.pogoObj['portals'][data.type].label;
+                lbl = data.lbl;
+                starInLayer = window.plugin.pogo.stopLayers[data.guid];
+                type = window.plugin.pogo.pogoObj['portals'][data.type].label;
                 window.plugin.pogo.addStar(guid, latlng, lbl, type);
             } else if (data.action === 'remove') {
-                var type = window.plugin.pogo.pogoObj['portals'][data.folder].label;
+                type = window.plugin.pogo.pogoObj['portals'][data.folder].label;
                 if (type === "pokestop") {
-                    var starInLayer = window.plugin.pogo.stopLayers[data.guid];
+                    starInLayer = window.plugin.pogo.stopLayers[data.guid];
                     window.plugin.pogo.stopLayerGroup.removeLayer(starInLayer);
                     delete window.plugin.pogo.stopLayers[data.guid];
                 }
@@ -800,6 +840,10 @@ function wrapper(plugin_info) {
                     var gymInLayer = window.plugin.pogo.gymLayers[data.guid];
                     window.plugin.pogo.gymLayerGroup.removeLayer(gymInLayer);
                     delete window.plugin.pogo.gymLayers[data.guid];
+                }if (type === "gym_ex") {
+                    var gymExInLayer = window.plugin.pogo.gymExLayers[data.guid];
+                    window.plugin.pogo.gymExLayerGroup.removeLayer(gymExInLayer);
+                    delete window.plugin.pogo.gymExLayers[data.guid];
                 }
             }
         } else if ((data.target === 'all' && (data.action === 'import' || data.action === 'reset')) || (data.target === 'folder' && data.action === 'remove')) {
@@ -827,12 +871,14 @@ function wrapper(plugin_info) {
         style += '.pogoStop span{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAPCAMAAACyXj0lAAACZFBMVEUAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAQECAAAAAAAGAQEAAAAPDw8AAAAMAgIAAAALAQEBAQETAwMAAAAGBQUMAgISEhIAAAAWFhYBAQEWAwMAAAACAgIDAwMFBQUGBgYJCQkPDw8REREVGBgWFhYXFxchISEiIiIkICAoKCgpICAtLCwtLi4uBQUuKysuLy8vEBAvMjEyMDAzMzM0NDQ4ODg5OTk6Ojo+Pj5AQUFBS0tCSEhDQ0NISEhJSUlMTExSUlJUVFRWVlZXV1dYCwtZCwtaWlpcXFxeXl5gYGBhBgZiYmJjY2NlDAxmDAxnZ2doaGhra2tsbGxtbW1wcHBwfHtxcXFycnJ0dHR1dXV2dnZ4CQl5eXl9fX2CgoKEhISFhYWGhoaIiIiIiomJh4qKioqLi4uMjIyNjY2PiZCQkJCUlJSXBASaERGanJycBAScnJytFRWuDg6urq6wFBS2wcG3t7e4FRW5t7q6Cwu6urq7Dg6+vr7CwsLDwMTEDg7FxcXHxsfIyMjJFxfKDw/MDg7MzMzPz8/P0NDQ0NDRDw/RFxfS09XX19faGBja2trbExPc3NzlGhrl5eXo6Ojs7u7u7u7vGxvwGhrw8PDyGhry8vLz8/P0Ghr3Gxv39/f4+Pj8/Pz8/v79/f3+////HBz/HR3/Hh7///9j6e8DAAAAPnRSTlMAAAIKDBIWGBshJTI0O0tQY2VocnN1fImVnZ6lqKmrrLCxs7u8vb3G0tbW1tra39/i4uXl7Ozv7+/v8fH6+jTKPt8AAAGeSURBVHgBYwACZiFlAxMdWT4Qm5ERImBoqgsUgAAeDfe8hsbaZEd5VpACkED6rK27Nk4IAAoAAbdZVldXd3dXV5OXOgtIAbfFlFMnT5w4eXJ3IVCAgVkzGywNJJo9JIAKmLWnnwJJA9XszZBgYBD0AEp1F2fWd3W3VtpwMTIKZgDlT8yZtPnUiYPrbLkYVEuBuj3t7OxyurpbPEUYGdWWnTp5MjeuwnfqqRMHCkQYjIoqK9Psqu2jHapqyiKlGRmN5y1f3h+7vn1G8Iq1i+qkGczsgMDewS7JDgSUGBnN/fyD3Np67BaG+IUGeisx6M0/fbrELjXK0e7QsfkukoyM+jtOn17ts2R2d8zR4zsmSjIoRJ8+fdoVqLn59LYFdgKMjApzgQKTw+KjN50+vDNPgIHf7jQQLO0EEqvyzdgYGfkTQAJ7tgCJfSst2RiYVJxPQ8E0O2FgODCp9MEEticKA0OSQ9NhP5jbYCcFDmoOrY4jYIENSVLguGCXs3NKKY2wsxIDRxZIILx38ZqZ5dZAAQjgFVdUlhHlhMQmmgAAN4GpuWb98MUAAAAASUVORK5CYII=)}';
 
         style += '.pogoGym span{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAPCAMAAACyXj0lAAAC7lBMVEUAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEAAAAAAAAAAAAAAAAAAAABAQEAAAABAQEBAQEAAAAAAAAAAAAAAAAAAAADAwMAAAAAAAABAQIAAAAAAAAAAAAAAAAAAAACAgIAAAAAAAABAAAAAAAAAAAAAAAAAAACAgIAAAAHBwcAAAACAgIAAAAbBgYBAQEBAQEZBgcAAAAAAAAAAAABAQEXFxcCAgICAgIHBAUBAQEGBgdyFRcRERFsFRYCAgIDAwMFBQUODg4EBAQFBQUREREFBQUGBgYTExMRCQoEBAQGBAVcIiYaGhoaGhsFBQUUFBRaJSgGBgYdFBgDAwMEBAQNDQ0ODg4fHyAjIyNYWFheLTEHBgcHBwgJCQkLCwsNDQ0PDw8RERESEhIUFBQVFRYWFhYXFxcYGBgZGRkZGRoaGhocHBwdHR0eHh4eHx8fHx8iIiIlJSUmJiYnJycpKSkqKiotLS0uLi4uLi8wMDAyMjIzMzM0NDQ2NjY4ODg6Ojo7Ozs7Oz09PT4+Pj4/Pz9DKS9DQ0NJSUpLS0xMTE1NTU1PT09QUFBRUVFSUlNXV1dZWVlbW1tcXFxeXl5eXl9jY2NkZGRmZmZoaGlsbG1wcHBycnJ1dXV7e3t/f3+AgYGBgYGFhYWIh4mPj4+THyGTk5SVlZWYmJqbm5ygoKCnp6irq6uvr6+wr7KwsLGxsbO1tbW3tri4t7m5ubu9HyDGxcjGxsfJJyjOzs7PHR7QIyTQ0NDR0dHSICHS0tLU1NTY2NjZ2dndIiPd3d3e3t7fIyTi4uLj4+PnICHn5+jq6urs6+zs7Ozu7u7w8PDw8PHx8fHx8fLy8fLy8vLzHR329vb29vf39/j4+Pj5+fn6Hh76Hx/7+/v7+/z8Hx/8/Pz8/P39Hh79/f3///+f+BszAAAAcXRSTlMAAAECAwQFBwoPFhskJSYqKy4yMzU4OTw/Q0hRW1xjZGVmb294e3+Fi4+QkZibnaWmqq+2t7m+x8nKzM3Oz9HR19fd3d/h4eLk5ebm5+rq7O7v8PDy8vP09fX19/f3+Pn5+fr6/Pz8/f3+/v7+/v7+/k5HHiYAAAGUSURBVHgBY2BkFHMMizAVYmRk5NLSVAJSUg5uwYHOlmIMjFzq+soMbHrZ3WsWNyfJ8Gh7pOTxMjJKW6fd/v79S6IFn4FXciUvg3HNoqXNk5Y3ZcXXLSrVBRooW3Dvw/lTr75nZM7Yvd6dgcF37YqGxTOrayZsubkgkpOBkd3v7MddLX2zL7cef3srSoWBIWh1z6yL2zo2XH9wpRLIZeSKu3Bj4uGj03tOv/+60IaBgSG0cWrnypldO5+8nubPDLSBI6GwpGje5KoDn3/uCxAEKvBctH9Oe+/GOy83lykyABUw+aw7sbV/yt4XPx83aTEAgXzxwSeX7t78ca3DDiTPyKBQsePd/YfPP71f5crGAAJGOduP3X3/aHW6AEQBg1ru3DM/fn47kioHFACpMHSy3/PsULc5SB6sQtI2Ov/pm2UeDEAREGLRsPK+uilaAqoApEku/NzJWHGQAASLurd1m4CYcBUuS+abQW0E8xXLQ4RBTLgS1foYfpgCEClSqwFiIYBIqzZEACrMrceKqoBbhxmqAAABho1+nW2udAAAAABJRU5ErkJggg==)}';
+        style += '.pogoGymEx span{background-image:url(data:image/png;base64,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)}';
 
         style += '@media print{#pogoTrigger{display:none!important}}';
         style += '#sidebar #portaldetails h3.title{width:auto}.pogoStop span,';
         style += '.pogoGym span{display:inline-block;float:left;margin:3px 1px 0 4px;width:16px;height:15px;overflow:hidden;background-repeat:no-repeat}';
-        style += '.pogoStop span,.pogoStop.favorite:focus span,.pogoGym span,.pogoGym.favorite:focus span{background-position:left top}';
-        style += '.pogoStop:focus span,.pogoStop.favorite span,.pogoGym:focus span,.pogoGym.favorite span{background-position:right top}';
+        style += '.pogoGymEx span{display:inline-block;float:left;margin:3px 1px 0 4px;width:16px;height:15px;overflow:hidden;background-repeat:no-repeat}';
+        style += '.pogoStop span,.pogoStop.favorite:focus span,.pogoGym span,.pogoGym.favorite:focus span,.pogoGymEx span,.pogoGymEx.favorite:focus span{background-position:left top}';
+        style += '.pogoStop:focus span,.pogoStop.favorite span,.pogoGym:focus span,.pogoGym.favorite span,.pogoGymEx:focus span,.pogoGymEx.favorite span{background-position:right top}';
         style += '#updatestatus .pogoStop{float:left;margin:-19px 0 0 -5px;padding:0 3px 1px 4px;background:#262c32}';
         style += '.pogoSetbox a{display:block;color:#ffce00;border:1px solid #ffce00;padding:3px 0;margin:10px auto;width:80%;text-align:center;background:rgba(8,48,78,.9)}';
         style += '.pogoSetbox a.disabled, .pogoSetbox a.disabled:hover{color:#666;border-color:#666;text-decoration:none}';
@@ -849,7 +895,7 @@ function wrapper(plugin_info) {
         style += ('.pogo_theme h3 {height: inherit; text-overflow: inherit; white-space: inherit;position: absolute;top: 4px;z-index: 2;left: 11px;color: #6d9099;}');
         style += ('.pogo_theme [class*="Star"] {position: absolute;z-index: 4}');
         style += ('.pogo_theme .pogoIconStar {z-index: 2;left: 20px;}');
-        style += ('.pogo_theme.show_stop_disk .pogoIconStar {left: 43%;}');
+        style += ('.pogo_theme.show_stop_disk .pogoIconStar {left: 39%;}');
         style += ('.pogo_theme.show_stop_disk [class*="Star"] {top: 50px}');
         style += ('.pogo_theme #portaldetails h3 {padding: 10px;background-color: #fefefedd;margin: 16px 0 0 -5px;border-radius: 0 20px 20px 0;}');
         style += ('.pogo_theme.show_stop_disk #portaldetails h3 {padding-top: 0 ;background-color: unset; margin: unset;border-radius: unset}');
@@ -954,7 +1000,11 @@ function wrapper(plugin_info) {
     window.plugin.pogo.setupContent = function () {
         plugin.pogo.htmlBoxTrigger = '<a id="pogoTrigger" class="open" onclick="document.getElementById(\'pikachu\').play()">Pikachu<audio id="pikachu" src="https://dl.dropboxusercontent.com/u/139783/Ingress/pogo-portals/sprites/pikachu.wav" preload="auto"></audio></a>';
         plugin.pogo.htmlDisabledMessage = '<div title="Your browser do not support localStorage">Plugin PoGo disabled*.</div>';
-        plugin.pogo.htmlStar = '<span class="pogoIconStar"><a class="pogoStop" accesskey="p" onclick="window.plugin.pogo.switchStarPortal(\'pokestop\');return false;" title="Mark this portal as a pokestop [p]"><span></span></a><a class="pogoGym" accesskey="g" onclick="window.plugin.pogo.switchStarPortal(\'gym\');return false;" title="Mark this portal as a PokeGym [g]"><span></span></a></span>';
+        plugin.pogo.htmlStar = '<span class="pogoIconStar">';
+        plugin.pogo.htmlStar += '<a class="pogoStop" accesskey="p" onclick="window.plugin.pogo.switchStarPortal(\'pokestop\');return false;" title="Mark this portal as a pokestop [p]"><span></span></a>';
+        plugin.pogo.htmlStar += '<a class="pogoGym" accesskey="g" onclick="window.plugin.pogo.switchStarPortal(\'gym\');return false;" title="Mark this portal as a PokeGym [g]"><span></span></a>';
+        plugin.pogo.htmlStar += '<a class="pogoGymEx" accesskey="x" onclick="window.plugin.pogo.switchStarPortal(\'gym_ex\');return false;" title="Mark this portal as a PokeGym EX[x]"><span></span></a>';
+        plugin.pogo.htmlStar += '</span>';
         plugin.pogo.htmlCallSetBox = '<a onclick="window.plugin.pogo.manualOpt();return false;">PoGo Opt</a>';
         plugin.pogo.htmlCloseButton = '<div class="bottom close"><span class="int_close"><a class="close" title="Close [w]" onclick="renderPortalDetails(null); if(isSmartphone()) show(&quot;map&quot;);$(\'.bottom.close\').removeClass(\'show\');" accesskey="w" data-unsp-sanitized="clean">X</a></span></div>';
 
@@ -1053,6 +1103,8 @@ function wrapper(plugin_info) {
         window.addLayerGroup('Pokestops', window.plugin.pogo.stopLayerGroup, true);
         window.plugin.pogo.gymLayerGroup = new L.LayerGroup();
         window.addLayerGroup('Gyms', window.plugin.pogo.gymLayerGroup, true);
+        window.plugin.pogo.gymExLayerGroup = new L.LayerGroup();
+        window.addLayerGroup('Gyms EX', window.plugin.pogo.gymExLayerGroup, true);
         window.plugin.pogo.addAllStars();
         window.addHook('pluginpogoEdit', window.plugin.pogo.editStar);
 
